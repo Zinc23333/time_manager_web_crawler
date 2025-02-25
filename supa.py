@@ -8,6 +8,7 @@ load_dotenv()
 
 url: str = os.environ.get("SUPA_URL") # type: ignore
 key: str = os.environ.get("SUPA_ANON") # type: ignore
+print(url, key)
 supa: Client = create_client(url, key)
 
 
