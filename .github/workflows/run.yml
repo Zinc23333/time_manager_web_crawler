@@ -3,7 +3,7 @@ name: Auto crawl tasks
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 */4 * * *' # 每4小时执行一次
+    - cron: '0 */4 * * *'
 
 jobs:
   build:
