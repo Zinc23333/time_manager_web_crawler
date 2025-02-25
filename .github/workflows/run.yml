@@ -18,7 +18,12 @@ jobs:
         echo -e "DS_KEY=$DS_KEY       \n"  > .env
         echo -e "SUPA_URL=$SUPA_URL   \n" >> .env
         echo -e "SUPA_ANON=$SUPA_ANON"    >> .env
-        ls -la
+
+
+    - run: |
+        export DS_KEY="${{ secrets.DS_KEY }}"
+        export SUPA_URL="${{ secrets.SUPA_URL }}"
+        export SUPA_ANON="${{ secrets.SUPA_ANON }}"
 
     - name: Set up Python
       uses: actions/setup-python@v2
