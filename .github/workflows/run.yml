@@ -24,6 +24,7 @@ jobs:
         export DS_KEY="${{ secrets.DS_KEY }}"
         export SUPA_URL="${{ secrets.SUPA_URL }}"
         export SUPA_ANON="${{ secrets.SUPA_ANON }}"
+        export
 
     - name: Set up Python
       uses: actions/setup-python@v2
