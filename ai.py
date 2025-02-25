@@ -1,12 +1,9 @@
-from functools import lru_cache
 import os
 from typing import Any
 from dotenv import load_dotenv
 from openai import OpenAI
 from json import loads
-from datetime import datetime
 import const
-# from functools import lru_cache
 from diskcache import Cache  # type: ignore
 
 load_dotenv()

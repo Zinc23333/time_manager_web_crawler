@@ -2,7 +2,6 @@ import datetime as dt
 from typing import Any
 from dotenv import load_dotenv
 from supabase import create_client, Client
-from random import randint
 import os
 
 load_dotenv()
