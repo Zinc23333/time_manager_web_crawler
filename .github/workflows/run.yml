@@ -18,6 +18,7 @@ jobs:
         echo -e "DS_KEY=$DS_KEY       \n"  > .env
         echo -e "SUPA_URL=$SUPA_URL   \n" >> .env
         echo -e "SUPA_ANON=$SUPA_ANON"    >> .env
+        ls -la
 
     - name: Set up Python
       uses: actions/setup-python@v2
