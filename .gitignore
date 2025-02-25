@@ -1,0 +1,9 @@
+local/
+.mypy_cache
+test*
+.env
+temp_code/
+gen_code/
+.caches/
+__pycache__/
+gen-*.py
