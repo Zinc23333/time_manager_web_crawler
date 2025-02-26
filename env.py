@@ -1,10 +1,4 @@
-SUPA_URL, SUPA_ANON, DS_KEY = "", "", ""
-
-with open(".env", "r") as f:
-    for l in f.readlines():
-        if l.startswith("SUPA_URL"):
-            SUPA_URL = l.split("=")[1].strip()
-        elif l.startswith("SUPA_ANON"):
-            SUPA_ANON = l.split("=")[1].strip()
-        elif l.startswith("DS_KEY"):
-            DS_KEY = l.split("=")[1].strip()
+import os
+SUPA_URL  = os.environ.get("SUPA_URL")
+SUPA_ANON = os.environ.get("SUPA_ANON")
+DS_KEY    = os.environ.get("DS_KEY")

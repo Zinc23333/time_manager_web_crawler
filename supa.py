@@ -5,7 +5,6 @@ from env import SUPA_URL, SUPA_ANON
 
 supa: Client = create_client(SUPA_URL, SUPA_ANON)
 
-
 def get_newest_code() -> bool:
     try:
         r = supa.table("crawler_web").select("id, pythonCode").execute()
