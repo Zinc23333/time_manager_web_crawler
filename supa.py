@@ -1,15 +1,9 @@
 import datetime as dt
 from typing import Any
-from dotenv import load_dotenv
 from supabase import create_client, Client
-import os
+from env import SUPA_URL, SUPA_ANON
 
-load_dotenv()
-
-url: str = os.environ.get("SUPA_URL") # type: ignore
-key: str = os.environ.get("SUPA_ANON") # type: ignore
-# print(url, key)
-supa: Client = create_client(url, key)
+supa: Client = create_client(SUPA_URL, SUPA_ANON)
 
 
 def get_newest_code() -> bool:

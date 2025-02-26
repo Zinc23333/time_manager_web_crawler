@@ -1,15 +1,13 @@
 import os
 from typing import Any
-from dotenv import load_dotenv
 from openai import OpenAI
 from json import loads
 import const
 from diskcache import Cache  # type: ignore
-
-load_dotenv()
+from env import DS_KEY
 
 client = OpenAI(
-    api_key = os.environ.get("DS_KEY"),
+    api_key = DS_KEY,
     base_url = "https://api.deepseek.com"
 )
 
