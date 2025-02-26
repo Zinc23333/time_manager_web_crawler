@@ -15,7 +15,7 @@ def handle_news(handled: list[str]) -> None:
                 if not r:
                     continue
                 
-                l = ai.parseForDb(r, news)
+                l = ai.parseForDb(r, url)
                 if not l:
                     continue
                 

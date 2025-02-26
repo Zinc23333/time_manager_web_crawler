@@ -3,7 +3,7 @@ from typing import Any
 from supabase import create_client, Client
 from env import SUPA_URL, SUPA_ANON
 
-supa: Client = create_client(SUPA_URL, SUPA_ANON)
+supa: Client = create_client(SUPA_URL, SUPA_ANON)  # type: ignore
 
 def get_newest_code() -> bool:
     try:
