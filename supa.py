@@ -7,7 +7,7 @@ supa: Client = create_client(SUPA_URL, SUPA_ANON)  # type: ignore
 
 def get_newest_code() -> bool:
     try:
-        r = supa.table("crawler_web").select("id, pythonCode").execute()
+        r = supa.table("crawler_web").select("id, pythonCode").eq("verify", True).execute()
         for d in r.data:
             with open(f"temp_code/n{d["id"]}.py", "w") as f:
                 f.write(d["pythonCode"])
