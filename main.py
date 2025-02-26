@@ -1,5 +1,9 @@
 from supa import get_newest_code
-import os, shutil
+import os, shutil, threading
+
+def run(no: str) -> None:
+    os.system(f"python gen-{no}.py")
+    os.remove(f"gen-{no}.py")
 
 if __name__ == "__main__":
     if os.path.exists("temp_code"):
@@ -13,6 +17,7 @@ if __name__ == "__main__":
     with open("crawler.py", "r") as f:
         template_code = f.readlines()
 
+    threads = []
     for file in os.listdir("temp_code"):
         no = file[1:-3]
         template_code[1] = f"from temp_code.n{no} import get_news_list, get_news\n"
@@ -20,6 +25,10 @@ if __name__ == "__main__":
 
         with open(f"gen-{no}.py", "w") as f:
             f.writelines(template_code)
-        os.system(f"python gen-{no}.py")
+        # os.system(f"python gen-{no}.py")
+        # os.remove(f"gen-{no}.py")
+        threads.append(threading.Thread(target=run, args=(no,)))
+    
+    for t in threads:
+        t.start()
 
-        os.remove(f"gen-{no}.py")
