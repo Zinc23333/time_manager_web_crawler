@@ -14,18 +14,6 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    - shell: bash
-      run: |
-        echo -e "DS_KEY=$DS_KEY       \n"  > .env
-        echo -e "SUPA_URL=$SUPA_URL   \n" >> .env
-        echo -e "SUPA_ANON=$SUPA_ANON"    >> .env
-
-
-    - run: |
-        export DS_KEY="${{ secrets.DS_KEY }}"
-        export SUPA_URL="${{ secrets.SUPA_URL }}"
-        export SUPA_ANON="${{ secrets.SUPA_ANON }}"
-
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
@@ -43,6 +31,23 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+
+    - shell: bash
+      run: |
+        echo -e "DS_KEY=$DS_KEY       \n"  > .env
+        echo -e "SUPA_URL=$SUPA_URL   \n" >> .env
+        echo -e "SUPA_ANON=$SUPA_ANON"    >> .env
+
+        ls -la
+
+
+    - run: |
+        export DS_KEY="${{ secrets.DS_KEY }}"
+        export SUPA_URL="${{ secrets.SUPA_URL }}"
+        export SUPA_ANON="${{ secrets.SUPA_ANON }}"
+
+
+
 
     # - name: Run main.py
     #   run: python main.py
