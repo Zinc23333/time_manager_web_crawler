@@ -34,27 +34,14 @@ jobs:
 
     - shell: bash
       run: |
-        echo -e "DS_KEY=$DS_KEY       \n"  > .env
-        echo -e "SUPA_URL=$SUPA_URL   \n" >> .env
-        echo -e "SUPA_ANON=$SUPA_ANON"    >> .env
+        # echo -e "DS_KEY=$DS_KEY       \n"  > .env
+        # echo -e "SUPA_URL=$SUPA_URL   \n" >> .env
+        # echo -e "SUPA_ANON=$SUPA_ANON"    >> .env
 
-        ls -la
+        # ls -la
 
-
-    - run: |
         export DS_KEY="${{ secrets.DS_KEY }}"
         export SUPA_URL="${{ secrets.SUPA_URL }}"
         export SUPA_ANON="${{ secrets.SUPA_ANON }}"
 
-
-
-
-    # - name: Run main.py
-    #   run: python main.py
-    
-    - shell: bash
-      run: |
-        python main.py
-
-    - run: |
-        
+        python main.py        
