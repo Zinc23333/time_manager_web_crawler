@@ -1,4 +1,3 @@
-import os
 from typing import Any
 from openai import OpenAI
 from json import loads

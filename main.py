@@ -1,4 +1,3 @@
-# from temp_code.n1 import *
 from supa import get_newest_code
 import os, shutil
 
