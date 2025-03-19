@@ -9,7 +9,7 @@ def handle_news(handled: list[str]) -> None:
     for url in urls:
         if url not in handled:
             try:
-                news = get_news(url)
+                title, news = get_news(url)
                 
                 r = ai.recognize(news)
                 if not r:
@@ -19,7 +19,8 @@ def handle_news(handled: list[str]) -> None:
                 if not l:
                     continue
                 
-                supa.upload_news(web_id, url, l)
+                m = ai.convertToMindmap(news)
+                supa.upload_news(web_id, url, l, m, title)
             except:
                 ...
                 

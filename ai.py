@@ -7,7 +7,7 @@ from env import DS_KEY
 
 client = OpenAI(
     api_key = DS_KEY,
-    base_url = "https://api.deepseek.com"
+    base_url = "https://dashscope.aliyuncs.com/compatible-mode/v1"
 )
 
 cache = Cache(".caches/ai")
@@ -24,7 +24,7 @@ def recognize(msg: str) -> list[dict[str, Any]] | None:
     try:
         print(f"SEND: {msg}")
         response = client.chat.completions.create(
-            model="deepseek-chat",
+            model="deepseek-v3",
             messages=[
                 {"role": "system", "content": const.prompt_basic},
                 {"role": "user", "content": msg},
@@ -41,8 +41,32 @@ def recognize(msg: str) -> list[dict[str, Any]] | None:
 
         # return r
     except Exception as e:
+        print("ERR: ", e)
         return None
 
+def convertToMindmap(msg: str) -> str | None:
+    try:
+        response = client.chat.completions.create(
+            model="deepseek-v3",
+            messages=[
+                {"role": "system", "content": const.prompt_mindmap},
+                {"role": "user", "content": msg},
+            ],
+            stream=False
+        )
+        content = response.choices[0].message.content
+        if content is None:
+            return None
+
+        for line in content.split("\n"):
+            l = line.lstrip()
+            if l and l.startswith("- ") is False:
+                return None
+        return content
+    
+    except Exception as e:
+        return None
+        
 
 # 解析：用于数据库
 # param j: 输入json

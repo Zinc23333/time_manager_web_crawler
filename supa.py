@@ -15,8 +15,8 @@ def get_newest_code() -> bool:
     except:
         return False
     
-def upload_news(web_id: int, url: str, tasks: list[dict[str, Any]]):
-    supa.table("crawler_tasks").upsert({"webId": web_id, "url": url, "tasks": tasks}, on_conflict="url").execute()
+def upload_news(web_id: int, url: str, tasks: list[dict[str, Any]], mindmap: str | None, title: str):
+    supa.table("crawler_tasks").upsert({"webId": web_id, "url": url, "tasks": tasks, "mindmap": mindmap, "title": title}, on_conflict="url").execute()
 
 def get_handled_urls() -> list[str]:
     r = supa.table("crawler_tasks").select("url").execute()
