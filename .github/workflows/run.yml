@@ -42,4 +42,6 @@ jobs:
         export SUPA_URL="${{ secrets.SUPA_URL }}"
         export SUPA_ANON="${{ secrets.SUPA_ANON }}"
 
-        python main.py        
+        python main.py
+
+        python relevance.py

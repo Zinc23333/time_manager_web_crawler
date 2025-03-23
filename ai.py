@@ -16,25 +16,39 @@ cache = Cache(".caches/ai")
 
 # def recognizeForUser(msg: str) -> str:
 
+def askAi(msg: str, prompt=const.prompt_basic) -> str|None:
+    print(f"SEND: {msg}")
+    response = client.chat.completions.create(
+        model="deepseek-v3",
+        messages=[
+            {"role": "system", "content": prompt},
+            {"role": "user", "content": msg},
+        ],
+        stream=False
+    )
+
+    print(response.choices[0].message.content)
+    return response.choices[0].message.content
 def recognize(msg: str) -> list[dict[str, Any]] | None:
     c = cache.get(msg)
     if c:
         return c
 
     try:
-        print(f"SEND: {msg}")
-        response = client.chat.completions.create(
-            model="deepseek-v3",
-            messages=[
-                {"role": "system", "content": const.prompt_basic},
-                {"role": "user", "content": msg},
-            ],
-            stream=False
-        )
+        r = askAi(msg)
+        # print(f"SEND: {msg}")
+        # response = client.chat.completions.create(
+        #     model="deepseek-v3",
+        #     messages=[
+        #         {"role": "system", "content": const.prompt_basic},
+        #         {"role": "user", "content": msg},
+        #     ],
+        #     stream=False
+        # )
 
-        print(response.choices[0].message.content)
+        # print(r)
         
-        content = "".join([c for c in response.choices[0].message.content.split() if "```" not in c]).strip()  # type: ignore
+        content = "".join([c for c in r.split() if "```" not in c]).strip()  # type: ignore
         j: list[dict[str, Any]] = loads(content)  # type: ignore
         cache.set(msg, j)
         return j
