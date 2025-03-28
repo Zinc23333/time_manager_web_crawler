@@ -4,6 +4,7 @@ from json import loads
 import const
 from diskcache import Cache  # type: ignore
 from env import DS_KEY
+from datetime import datetime
 
 client = OpenAI(
     api_key = DS_KEY,
@@ -85,9 +86,16 @@ def convertToMindmap(msg: str) -> str | None:
 # 解析：用于数据库
 # param j: 输入json
 # param c: 输入原文
+date_format = r"%Y-%m-%dT%H:%M:%S"
+def to_timestamp(s: str) -> int:
+    return int(datetime.strptime(s, date_format).timestamp() * 1000)
 def parseEventForDb(j: dict[str, Any], c: str) -> dict[str, Any]:
-    j["startTime"] = j["startTime"] * 1000 if j["startTime"] else None
-    j["endTime"] = j["endTime"] * 1000 if j["endTime"] else None
+    
+    j["startTime"] = to_timestamp(j["startTime"]) if j["startTime"] else None
+    # j["startTime"] = j["startTime"] * 1000 if j["startTime"] else None
+    j["endTime"] = to_timestamp(j["endTime"]) if j["endTime"] else None
+    # j["endTime"] = j["endTime"] * 1000 if j["endTime"] else None
+    j["noticeTimes"] = [to_timestamp(i) for i in j["noticeTimes"] if i]
     j["content"] = c
     j["source"] = "网页爬取"
     
